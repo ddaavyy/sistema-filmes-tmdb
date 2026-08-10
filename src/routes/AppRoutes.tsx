@@ -1,17 +1,18 @@
-import React, { Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { LoadingPage } from '@shared/ui/LoadingPage'
+import { LoadingPage } from "@shared/ui/LoadingPage";
+import { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 
-const MoviesModule = React.lazy(() => import('../modules/movies'))
-const FavoritesModule = React.lazy(() => import('../modules/favorites'))
+import { DetailsPage, FavoritesPage, HomePage, SearchPage } from "./routes";
 
-export function AppRoutes() {
+export const AppRoutes = () => {
   return (
     <Suspense fallback={<LoadingPage />}>
       <Routes>
-        <Route path="/*" element={<MoviesModule />} />
-        <Route path="/favorites/*" element={<FavoritesModule />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/movie/:id" element={<DetailsPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
     </Suspense>
-  )
-}
+  );
+};
