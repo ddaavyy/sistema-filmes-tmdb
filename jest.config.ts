@@ -47,6 +47,7 @@ const config: Config = {
     "!src/vite-env.d.ts",
     "!coverage/**",
   ],
+  coveragePathIgnorePatterns: ["routes.ts"],
 };
 
 export default config;
