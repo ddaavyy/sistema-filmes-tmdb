@@ -1,32 +1,20 @@
-import { api } from "@shared/lib/axiosClient";
 import type { MovieDetails, MovieSearchResult } from "@modules/movies/types";
+import { api } from "@shared/lib/axiosClient";
 
-function getApiKey() {
-  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  if (!apiKey) {
-    throw new Error("VITE_TMDB_API_KEY is not defined");
-  }
-  return apiKey;
-}
+export const fetchMovies = async (query = "", page = 1): Promise<MovieSearchResult> => {
+  const endpoint = query.trim() ? "/search/movie" : "/movie/popular";
 
-export function fetchMovies(query = "", page = 1): Promise<MovieSearchResult> {
-  return api
-    .get("/search/movie", {
-      params: {
-        api_key: getApiKey(),
-        query: query || "batman",
-        page,
-      },
-    })
-    .then((response) => response.data);
-}
+  const { data } = await api.get(endpoint, {
+    params: {
+      query: query.trim() || undefined,
+      page,
+    },
+  });
 
-export function fetchMovieDetails(id: string): Promise<MovieDetails> {
-  return api
-    .get(`/movie/${id}`, {
-      params: {
-        api_key: getApiKey(),
-      },
-    })
-    .then((response) => response.data);
-}
+  return data;
+};
+
+export const fetchMovieDetails = async (id: string): Promise<MovieDetails> => {
+  const { data } = await api.get(`/movie/${id}`);
+  return data;
+};

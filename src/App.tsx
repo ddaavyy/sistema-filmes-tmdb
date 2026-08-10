@@ -1,7 +1,14 @@
-import { AppRoutes } from './routes/AppRoutes'
+import { Header } from "@shared/ui/Header";
 
-function App() {
-  return <AppRoutes />
-}
+import { AppRoutes } from "./routes/AppRoutes";
 
-export default App
+const App = () => {
+  return (
+    <>
+      <Header />
+      <AppRoutes />
+    </>
+  );
+};
+
+export default App;
