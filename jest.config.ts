@@ -45,7 +45,7 @@ const config: Config = {
     "!src/**/__tests__/**",
     "!src/main.tsx",
     "!src/vite-env.d.ts",
-    "!coverage/**"
+    "!coverage/**",
   ],
 };
 
