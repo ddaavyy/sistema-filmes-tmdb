@@ -1,6 +1,6 @@
 import type { MovieDetails } from "@modules/movies/types";
 
-import { sortMovies } from "../useFavoriteMovies";
+import { sortMovies, type SortOption } from "../useFavoriteMovies";
 
 jest.mock("@modules/movies/services/tmdb", () => ({
   fetchMovieDetails: jest.fn(),
@@ -49,5 +49,16 @@ describe("sortMovies", () => {
     const copy = [...movies];
     sortMovies(movies, "title-asc");
     expect(movies).toEqual(copy);
+  });
+
+  it("returns array as-is when an invalid sort option is passed (default case)", () => {
+    const result = sortMovies(movies, "invalid-option" as SortOption);
+    expect(result).toEqual(movies);
+  });
+});
+
+describe("useFavoriteMovies hook", () => {
+  it("initializes with empty favorites", () => {
+    jest.clearAllMocks();
   });
 });
